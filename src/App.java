@@ -13,8 +13,8 @@ public class App {
 
     public static boolean sendMessageTest() {
         try {
-            MailSender sender = new MailSender(Auth.USER, Auth.PASS);
-            return sender.sendMessage(Auth.DESTINATION, "Hello world!");
+            MailSender sender = MailSender.createMailSender(Auth.USER, Auth.PASS);
+            return sender.sendMessage(Auth.PHONE_CONTACT, "Hello world!");
         } catch (IOException e) {
             e.printStackTrace();
             return false;

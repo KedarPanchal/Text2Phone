@@ -17,8 +17,9 @@ public class MailSender {
     private String sender;
     private Session session;
 
-    public MailSender(String sender, String password) throws IOException {
+    private MailSender(String sender, String password) throws IOException {
         this.host = "smtp.gmail.com";
+        this.sender = sender;
 
         Properties properties = new Properties();
         properties.setProperty("mail.smtp.ssl.trust", this.host);
@@ -36,13 +37,17 @@ public class MailSender {
             });
     }
 
+    public static MailSender createMailSender(String sender, String password) throws IOException {
+        return new MailSender(sender, password);
+    }
+
     public boolean sendMessage(String to, String text) {
         try {
             MimeMessage message = new MimeMessage(this.session);
 
             message.setFrom(new InternetAddress(this.sender));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("Test");
+            // message.setSubject("Test");
             message.setText(text);
 
             Transport.send(message);
@@ -52,5 +57,9 @@ public class MailSender {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean sendMessage(Contact contact, String text) {
+        return this.sendMessage(contact.getEmail(), text);
     }
 }
