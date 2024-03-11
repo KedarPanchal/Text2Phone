@@ -8,7 +8,7 @@ public class Contact {
 
     private static final Map<String, String> ret = Contact.createMap();
     
-    private String smsGateway;
+    private final String smsGateway;
 
     public Contact(String number, String carrier) {
         this.smsGateway = number + "@" + Contact.ret.getOrDefault(carrier, "");
@@ -27,6 +27,7 @@ public class Contact {
         ret.put("Cricket Wirless", "mms.cricketwireless.net");
         ret.put("Google Fi Wireless", "msg.fi.google.com");
         ret.put("MetroPCS", "mymetropcs.com");
+        ret.put("Spectrum Mobile", "mypixmessages.com");
         ret.put("Sprint", "pm.sprint.com");
         ret.put("T-Mobile", "tmomail.net");
         ret.put("U.S. Cellular", "mms.uscc.net");
