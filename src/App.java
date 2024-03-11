@@ -1,14 +1,20 @@
 import java.io.IOException;
 
+import com.beust.jcommander.JCommander;
+
+import argtools.InitialArguments;
 import mailtools.MailSender;
 
 public class App {
     public static void main(String[] args) {
-        if (sendMessageTest()) {
-            System.out.println("Works! :)");
-        } else {
-            System.out.println("Doesn't work :C");
-        }
+        System.out.println(args[0]);
+
+        InitialArguments initialArgs = new InitialArguments();
+        JCommander.newBuilder()
+            .addObject(initialArgs)
+            .build()
+            .parse(args);
+        System.out.println(initialArgs.getLogin());
     }
 
     public static boolean sendMessageTest() {
