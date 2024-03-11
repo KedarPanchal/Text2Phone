@@ -57,6 +57,7 @@ public class MailSender {
 
     private boolean sendText(MimeMessage message, String text) {
         try {
+            message.setSubject("Error: File not found");
             message.setText(text);
             Transport.send(message);
 
@@ -91,6 +92,7 @@ public class MailSender {
             try {
                return this.sendFile(message, filename);
             } catch (IOException e) {
+                System.out.println("Error: File not found. Sending text instead...");
                 return this.sendText(message, filename);
             }
         } else {
