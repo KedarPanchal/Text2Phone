@@ -1,7 +1,6 @@
 package argtools;
 
 import java.util.List;
-import java.util.Arrays;
 
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
