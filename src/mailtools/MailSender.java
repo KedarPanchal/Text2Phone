@@ -1,5 +1,6 @@
 package mailtools;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -67,20 +68,27 @@ public class MailSender {
         }
     }
 
-    private boolean sendFile(MimeMessage message, String fileName) throws IOException {
+    private boolean sendFile(MimeMessage message, File file) throws IOException {
         try {
-            message.setSubject(fileName);
-            
-            MimeBodyPart attachment = new MimeBodyPart();
-            attachment.attachFile(fileName);
+            message.setSubject(file.getName());
+            if (!file.isDirectory()) {
+                MimeBodyPart attachment = new MimeBodyPart();
+                attachment.attachFile(file);
 
-            MimeMultipart multipart = new MimeMultipart();
-            multipart.addBodyPart(attachment);
+                MimeMultipart multipart = new MimeMultipart();
+                multipart.addBodyPart(attachment);
 
-            message.setContent(multipart);
+                message.setContent(multipart);
 
-            Transport.send(message);
-            return true;
+                Transport.send(message);
+
+                return true;
+            } else {
+                File zipFile = new File(file.getAbsolutePath() + ".zip");
+                Zipper.zipFolder(file.toPath(), zipFile.toPath());
+                zipFile.deleteOnExit();
+                return sendFile(message, zipFile);
+            }          
         } catch (MessagingException e) {
             return false;
         }
@@ -90,7 +98,7 @@ public class MailSender {
         MimeMessage message = this.initMessage(to);
         if (message != null) {
             try {
-               return this.sendFile(message, filename);
+               return this.sendFile(message, new File(filename));
             } catch (IOException e) {
                 System.out.println("Error: File not found. Sending text instead...");
                 return this.sendText(message, filename);
