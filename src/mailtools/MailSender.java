@@ -10,7 +10,9 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 public class MailSender {
     private String host;
@@ -41,25 +43,58 @@ public class MailSender {
         return new MailSender(sender, password);
     }
 
-    public boolean sendMessage(String to, String text) {
+    private MimeMessage initMessage(String to) {
+        MimeMessage ret = new MimeMessage(this.session);
         try {
-            MimeMessage message = new MimeMessage(this.session);
+            ret.setFrom(new InternetAddress(this.sender));
+            ret.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-            message.setFrom(new InternetAddress(this.sender));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            // message.setSubject("Test");
+            return ret;
+        } catch (MessagingException e) {
+            return null;
+        }
+    } 
+
+    private boolean sendText(MimeMessage message, String text) {
+        try {
             message.setText(text);
-
             Transport.send(message);
-            
+
             return true;
         } catch (MessagingException e) {
-            e.printStackTrace();
             return false;
         }
     }
 
-    public boolean sendMessage(Contact contact, String text) {
-        return this.sendMessage(contact.getEmail(), text);
+    private boolean sendFile(MimeMessage message, String fileName) throws IOException {
+        try {
+            message.setSubject(fileName);
+            
+            MimeBodyPart attachment = new MimeBodyPart();
+            attachment.attachFile(fileName);
+
+            MimeMultipart multipart = new MimeMultipart();
+            multipart.addBodyPart(attachment);
+
+            message.setContent(multipart);
+
+            Transport.send(message);
+            return true;
+        } catch (MessagingException e) {
+            return false;
+        }
+    }
+
+    public boolean sendMessage(String to, String filename) {
+        MimeMessage message = this.initMessage(to);
+        if (message != null) {
+            try {
+               return this.sendFile(message, filename);
+            } catch (IOException e) {
+                return this.sendText(message, filename);
+            }
+        } else {
+            return false;
+        }
     }
 }

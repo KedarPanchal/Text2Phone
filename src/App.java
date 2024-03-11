@@ -14,7 +14,7 @@ public class App {
     public static boolean sendMessageTest() {
         try {
             MailSender sender = MailSender.createMailSender(Auth.USER, Auth.PASS);
-            return sender.sendMessage(Auth.PHONE_CONTACT, "Hello world!");
+            return sender.sendMessage(Auth.PHONE_CONTACT.getEmail(), Auth.FILENAME);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
