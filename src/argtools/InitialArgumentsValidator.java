@@ -7,11 +7,10 @@ import com.beust.jcommander.ParameterException;
 
 public class InitialArgumentsValidator implements IParametersValidator {
     @Override
-    public void validate(Map<String,  Object> parameters) throws ParameterException {
+    public void validate(Map<String,  Object> parameters) throws ParameterException { // You don't need this method, because you're valid! :D
         int count = 0;
         for (Map.Entry<String, Object> parameter : parameters.entrySet()) {
             if (parameter.getValue() != null && !parameter.getValue().equals(Boolean.FALSE)) {
-                System.out.println(parameter);
                 count++;
             }
 

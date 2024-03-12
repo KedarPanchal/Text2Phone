@@ -13,7 +13,7 @@ public class InitialArguments {
     @Parameter(names={"-o", "--logout"}, description="Logout of SMTP provider")
     private boolean logout = false;
 
-    @Parameter(names={"-ld", "--list-devices"}, description="Lists devices")
+    @Parameter(names={"-d", "--list-devices"}, description="Lists devices")
     private boolean listDevices = false;
 
     @Parameter(names={"-h", "--help"}, help=true)
@@ -35,6 +35,10 @@ public class InitialArguments {
 
     public boolean getListDevices() {
         return this.listDevices;
+    }
+
+    public boolean getHelp() { // Me frfr
+        return this.help;
     }
 
     public List<String> getDeviceInfo() {
