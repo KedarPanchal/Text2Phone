@@ -6,16 +6,14 @@ import java.util.LinkedHashMap;
 
 public class Contact {
 
-    private static final Map<String, String> ret = Contact.createMap();
+    private static final Map<String, String> providers = Contact.createMap();
     
-    private final String smsGateway;
-
-    public Contact(String number, String carrier) {
-        this.smsGateway = number + "@" + Contact.ret.getOrDefault(carrier, "");
+    public static String createContact(String number, String carrier) {
+        return number + "@" + Contact.providers.getOrDefault(carrier, "");
     }
 
-    public Contact(String number, int carrierIndex) {
-        this.smsGateway = number + "@" + Contact.ret.keySet().toArray()[carrierIndex - 1];
+    public static String createContact(String number, int carrierIndex) {
+        return number + "@" + providers.get(Contact.providers.keySet().toArray()[carrierIndex]);
     }
 
     private static Map<String, String> createMap() {
@@ -38,7 +36,11 @@ public class Contact {
         return Collections.unmodifiableMap(ret);
     }
 
-    public String getEmail() {
-        return this.smsGateway;
+    public static int getNumberOfCarriers() {
+        return Contact.providers.size();
+    }
+
+    public static String parseNumber(String email) {
+        return email.substring(0, email.indexOf("@"));
     }
 }

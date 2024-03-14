@@ -19,8 +19,11 @@ public class InitialArguments {
     @Parameter(names={"-h", "--help"}, help=true)
     private boolean help = false;
 
-    @Parameter(names={"-a", "--add-device"}, arity=3, description="Add device")
-    private List<String> deviceInfo;
+    @Parameter(names={"-a", "--add-device"}, description="Add a device")
+    private boolean addDevice = false;
+
+    @Parameter(names={"-r", "--remove-device"}, description="Remove a device")
+    private boolean removeDevice = false;
 
     @Parameter(names={"-s", "--send", "--send-file"}, description="Sending file to iPhone address", arity=2)
     private List<String> sendInfo;
@@ -41,8 +44,12 @@ public class InitialArguments {
         return this.help;
     }
 
-    public List<String> getDeviceInfo() {
-        return this.deviceInfo;
+    public boolean getAddDevice() {
+        return this.addDevice;
+    }
+
+    public boolean getRemoveDevice() {
+        return this.removeDevice;
     }
 
     public List<String> getSendInfo() {
