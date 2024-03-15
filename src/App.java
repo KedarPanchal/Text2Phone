@@ -163,15 +163,4 @@ public class App {
             System.err.println("Error: Unable to send message");
         }
     }
-
-    // Delete this once code workie good
-    public static boolean sendMessageTest() {
-        try {
-            MailSender sender = new MailSender(Auth.USER, Auth.PASS);
-            return sender.sendMessage(Auth.PHONE_CONTACT, Auth.FILENAME);
-        } catch (IOException e) {
-            e.printStackTrace(); // *projectile vomits*
-            return false;
-        }
-    }
 }
