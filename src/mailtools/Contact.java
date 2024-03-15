@@ -7,10 +7,6 @@ import java.util.LinkedHashMap;
 public class Contact {
 
     private static final Map<String, String> providers = Contact.createMap();
-    
-    public static String createContact(String number, String carrier) {
-        return number + "@" + Contact.providers.getOrDefault(carrier, "");
-    }
 
     public static String createContact(String number, int carrierIndex) {
         return number + "@" + providers.get(Contact.providers.keySet().toArray()[carrierIndex]);
