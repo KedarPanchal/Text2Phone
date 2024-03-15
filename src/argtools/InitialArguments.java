@@ -25,7 +25,7 @@ public class InitialArguments {
     @Parameter(names={"-r", "--remove-device"}, description="Remove a device")
     private boolean removeDevice = false;
 
-    @Parameter(names={"-s", "--send", "--send-file"}, description="Sending file to iPhone address", arity=2)
+    @Parameter(names={"-s", "--send", "--send-file", "--send-message"}, description="Sending file to iPhone address", arity=2)
     private List<String> sendInfo;
 
     public boolean getLogin() {

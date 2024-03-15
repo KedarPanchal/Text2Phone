@@ -20,7 +20,7 @@ public class MailSender {
     private String sender;
     private Session session;
 
-    private MailSender(String sender, String password) throws IOException {
+    public MailSender(String sender, String password) throws IOException {
         this.host = "smtp.gmail.com";
         this.sender = sender;
 
@@ -38,10 +38,6 @@ public class MailSender {
                     return new PasswordAuthentication(sender, password);
                 }    
             });
-    }
-
-    public static MailSender createMailSender(String sender, String password) throws IOException {
-        return new MailSender(sender, password);
     }
 
     private MimeMessage initMessage(String to) {
