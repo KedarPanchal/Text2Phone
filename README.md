@@ -45,11 +45,31 @@ A Java program that enables sending files from your PC to your phone using SMS G
 
   ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/bf4ac659-39ad-47f9-b677-5e04d15c2a97)
   
-- With `-h` (or) `--help`: Prints out the descriptions of all the available arguments. If a flag is specified that's an invalid argument for this program, the output of the `--help` flag is printed as well.
+- With `-h` (or) `--help`: Prints out the descriptions of all the available arguments. If a flag is specified that's an invalid argument for this program, the output of the `--help` flag is printed instead.
+
+  ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/82562390-8d20-4c9b-acf9-8004782700fc)
 
 ### Supported SMTP providers
 
+Gmail logins are only supported at the moment.
+
 ### Supported cell service providers
+
+The following cell providers can have files sent to them:
+- Alltel
+- AT&T
+- Boost Mobile
+- Consumer Cellular
+- Cricket Wireless
+- Google Fi Wireless
+- MetroPCS
+- Spectrum Mobile
+- Sprint
+- T-Mobile
+- U.S. Cellular
+- Verizon Wireless
+- Virgin Mobile
+- XFinity Mobile
 
 # Installation
 
