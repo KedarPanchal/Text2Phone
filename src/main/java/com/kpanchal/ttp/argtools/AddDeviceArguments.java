@@ -10,7 +10,6 @@ public class AddDeviceArguments {
     private String phoneNumber;
 
     @Parameter(names="Cell Service Provider", description="""
-            Enter the index of the device's cell service provider:
             [1] Alltel
             [2] AT&T
             [3] Boost Mobile
@@ -24,7 +23,8 @@ public class AddDeviceArguments {
             [11] U.S. Cellular
             [12] Verizon Wireless
             [13] Virgin Mobile
-            [14] XFinity Mobile""",
+            [14] XFinity Mobile
+            Enter the index of the device's cell service provider""",
             password=true, echoInput=true)
     private int cellProvider;
 
