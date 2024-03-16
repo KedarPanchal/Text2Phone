@@ -18,10 +18,10 @@ import com.kpanchal.ttp.mailtools.MailSender;
 public class App {
     public static void main(String[] args) {
         InitialArguments initialArgs = new InitialArguments();
-        JCommander.newBuilder()
+        JCommander jc = JCommander.newBuilder()
             .addObject(initialArgs)
-            .build()
-            .parse(args);
+            .build();
+        jc.parse(args);
         
         if (initialArgs.getLogin()) {
             try {
@@ -56,6 +56,8 @@ public class App {
             } catch (IOException e) {
                 System.err.println("Error: Unable to initialize message sender:\n" + e.getMessage());
             }
+        } else {
+            jc.usage();
         }
     }
 
