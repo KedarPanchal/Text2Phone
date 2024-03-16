@@ -1,5 +1,5 @@
 target/
-src/Auth.java
+auth.txt
 testfiles/
 config/
 scripts/run

@@ -22,7 +22,7 @@ public class InitialArguments {
     @Parameter(names={"-d", "--list-devices"}, description="Lists devices that can have images be sent to")
     private boolean listDevices = false;
 
-    @Parameter(names={"-s", "--send", "--send-file"}, description="Sends a file to iPhone address. The first argument is the name of the device the fill will be sent to. The second is the path of the file that will be sent to the device.", arity=2)
+    @Parameter(names={"-s", "--send", "--send-file"}, description="Sends a file to iPhone address. The first argument is the name of the device the file will be sent to. The second is the path of the file that will be sent to the device.", arity=2)
     private List<String> sendInfo;
 
     @Parameter(names={"-h", "--help"}, description="Lists all commands and their usages", help=true)
