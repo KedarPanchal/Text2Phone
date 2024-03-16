@@ -1,4 +1,4 @@
-package mailtools;
+package com.kpanchal.ttp.mailtools;
 
 import java.io.IOException;
 import java.io.FileOutputStream;

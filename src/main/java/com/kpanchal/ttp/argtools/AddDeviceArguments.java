@@ -1,4 +1,4 @@
-package argtools;
+package com.kpanchal.ttp.argtools;
 
 import com.beust.jcommander.Parameter;
 

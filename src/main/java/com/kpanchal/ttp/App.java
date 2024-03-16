@@ -1,3 +1,5 @@
+package com.kpanchal.ttp;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -6,15 +8,14 @@ import java.util.Properties;
 
 import com.beust.jcommander.JCommander;
 
-import argtools.AddDeviceArguments;
-import argtools.InitialArguments;
-import argtools.LoginArguments;
-import argtools.RemoveDeviceArguments;
-import mailtools.Contact;
-import mailtools.MailSender;
+import com.kpanchal.ttp.argtools.AddDeviceArguments;
+import com.kpanchal.ttp.argtools.InitialArguments;
+import com.kpanchal.ttp.argtools.LoginArguments;
+import com.kpanchal.ttp.argtools.RemoveDeviceArguments;
+import com.kpanchal.ttp.mailtools.Contact;
+import com.kpanchal.ttp.mailtools.MailSender;
 
 public class App {
-    public static String CONFIG_PATH = Thread.currentThread().getContextClassLoader().getResource("").getPath() + "config";
     public static void main(String[] args) {
         InitialArguments initialArgs = new InitialArguments();
         JCommander.newBuilder()
@@ -59,8 +60,8 @@ public class App {
     }
 
     public static void setLogin() throws IOException {
-        new File(CONFIG_PATH).mkdir();
-        String propertiesPath = CONFIG_PATH + File.separator + "login.properties";
+        new File("config").mkdir();
+        String propertiesPath = "config" + File.separator + "login.properties";
 
         if (!new File(propertiesPath).exists()) {
             LoginArguments loginArgs = new LoginArguments();
@@ -79,7 +80,7 @@ public class App {
     }
 
     public static void logout() throws IOException {
-        String propertiesPath = CONFIG_PATH + File.separator + "login.properties";
+        String propertiesPath = "config" + File.separator + "login.properties";
         if (new File(propertiesPath).exists()) {
             new File(propertiesPath).delete();
         } else {
@@ -88,8 +89,8 @@ public class App {
     }
 
     public static void addDevice() throws IOException {
-        new File(CONFIG_PATH).mkdir();
-        String propertiesPath = CONFIG_PATH + File.separator + "deviceinfo.properties";
+        new File("config").mkdir();
+        String propertiesPath = "config" + File.separator + "deviceinfo.properties";
 
         AddDeviceArguments deviceArgs = new AddDeviceArguments();
         JCommander.newBuilder()
@@ -105,7 +106,7 @@ public class App {
     }
 
     public static void removeDevice() throws IOException {
-        String propertiesPath = CONFIG_PATH + File.separator + "deviceInfo.properties";
+        String propertiesPath = "config" + File.separator + "deviceInfo.properties";
 
         RemoveDeviceArguments deviceArgs = new RemoveDeviceArguments();
         JCommander.newBuilder()
@@ -123,7 +124,7 @@ public class App {
     }
 
     public static void listDevices() {
-        String propertiesPath = CONFIG_PATH + File.separator + "deviceInfo.properties";
+        String propertiesPath = "config" + File.separator + "deviceInfo.properties";
 
         Properties deviceInfo = new Properties();
         try {
@@ -138,7 +139,7 @@ public class App {
     }
 
     public static void sendMessage(String deviceName, String filePath) throws IOException {
-        String loginPath = CONFIG_PATH + File.separator + "login.properties";
+        String loginPath = "config" + File.separator + "login.properties";
         Properties loginInfo = new Properties();
         try {
             loginInfo.load(new FileInputStream(loginPath));
@@ -148,7 +149,7 @@ public class App {
         }
         MailSender sender = new MailSender(loginInfo.getProperty("EmailAddress"), loginInfo.getProperty("Password"));
         
-        String devicePath = CONFIG_PATH + File.separator + "deviceinfo.properties";
+        String devicePath = "config" + File.separator + "deviceinfo.properties";
         Properties deviceInfo = new Properties();
         try {
             deviceInfo.load(new FileInputStream(devicePath));

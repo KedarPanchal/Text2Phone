@@ -1,6 +1,7 @@
-out/
+target/
 src/Auth.java
 testfiles/
 config/
 scripts/run
 scripts/run.ps1
+dependency-reduced-pom.xml
