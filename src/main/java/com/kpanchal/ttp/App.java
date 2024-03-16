@@ -51,7 +51,6 @@ public class App {
             listDevices();
         } else if (initialArgs.getSendInfo() != null) {
             try {
-                System.out.println(initialArgs.getSendInfo());
                 sendMessage(initialArgs.getSendInfo().get(0), initialArgs.getSendInfo().get(1));
             } catch (IOException e) {
                 System.err.println("Error: Unable to initialize message sender:\n" + e.getMessage());
@@ -161,7 +160,6 @@ public class App {
         }
         
         String deviceEmail = deviceInfo.getProperty(deviceName);
-        System.out.println(deviceEmail);
         if (!sender.sendMessage(deviceEmail, filePath)) {
             System.err.println("Error: Unable to send message");
         }
