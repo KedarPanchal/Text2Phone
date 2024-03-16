@@ -75,6 +75,7 @@ public class App {
             login.setProperty("EmailAddress", loginArgs.getEmailAddress());
             login.setProperty("Password", loginArgs.getPassword());
             login.store(new FileOutputStream(propertiesPath), "Stored login email and password");
+            System.out.println("Successfully logged in");
         } else {
             System.out.println("Error: You're already logged in. Run the program with the --logout flag to log out");
         }    
@@ -84,6 +85,7 @@ public class App {
         String propertiesPath = "config" + File.separator + "login.properties";
         if (new File(propertiesPath).exists()) {
             new File(propertiesPath).delete();
+            System.out.println("Successfully logged out");
         } else {
             System.err.println("Error: You're already logged out. Run the program with the --login flag to log in");
         }
@@ -104,6 +106,7 @@ public class App {
         deviceInfo.load(new FileInputStream(propertiesPath));
         deviceInfo.setProperty(deviceArgs.getDeviceName(), Contact.createContact(deviceArgs.getPhoneNumber(), deviceArgs.getCellProviderIndex() - 1));
         deviceInfo.store(new FileOutputStream(propertiesPath), "Added device " + deviceArgs.getDeviceName());
+        System.out.println("Added device " + deviceArgs.getDeviceName());
     }
 
     public static void removeDevice() throws IOException {
@@ -121,6 +124,7 @@ public class App {
             System.err.println("Error: No device with name " + deviceArgs.getDeviceName() + " found");
         } else {
             deviceInfo.store(new FileOutputStream(propertiesPath), "Removed device " + deviceArgs.getDeviceName());
+            System.out.println("Removed device " + deviceArgs.getDeviceName());
         }
     }
 
@@ -161,7 +165,9 @@ public class App {
         
         String deviceEmail = deviceInfo.getProperty(deviceName);
         if (!sender.sendMessage(deviceEmail, filePath)) {
-            System.err.println("Error: Unable to send message");
+            System.err.println("Error: Unable to send file");
+        } else {
+            System.out.println("Successfully sent to device " + deviceName);
         }
     }
 }
