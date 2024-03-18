@@ -85,7 +85,7 @@ The following cell service providers can have files sent to them:
 ### `Error: Unable to send file` message
 The error mainly occurs because Gmail requires users to use an "app password" when logging into third-party apps. Generate an app password for your Gmail account by following [these instructions](https://support.google.com/accounts/answer/185833?hl=en) and then log in to the program using the app password you just generated. 
 ### The program is saying `Successfully sent to device` but I'm not receiving messages
-Some cell service providers (like T-Mobile) block emails from sending messages through MMS gateways repeatedly in a short period. Add the email you use with this program to your device's contacts, and then try sending the files to your device again.
+Some cell service providers (like T-Mobile) block emails from sending messages through MMS gateways repeatedly in a short period. Add the email you use with this program to your device's contacts, and then try sending the files to your device again. If that doesn't work, Gmail allows adding a `+` character followed by text before the `@` symbol when using your email address. For example, `test@gmail.com` and `test+sometext@gmail.com` are both considered the same email address and use the same login credentials. Try logging in with a similarly modified email address and sending your file to a device again.
 
 # License
 [(Back to top)](#table-of-contents)
