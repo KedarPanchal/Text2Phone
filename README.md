@@ -1,5 +1,5 @@
 # Text2Phone
-A Java program that enables sending files from your PC to your phone using SMS Gateways.
+A Java program that enables sending files from your PC to your phone using MMS Gateways.
 
 # Table of contents
 - [Usage](#usage)
@@ -51,11 +51,11 @@ A Java program that enables sending files from your PC to your phone using SMS G
 
 ### Supported SMTP providers
 
-Gmail logins are only supported at the moment.
+Text2Phone uses MMS gateways to send files to your phone, which uses SMTP (E-Mail) in the backend. Gmail logins are only supported at the moment.
 
 ### Supported cell service providers
 
-The following cell providers can have files sent to them:
+The following cell service providers can have files sent to them:
 - Alltel
 - AT&T
 - Boost Mobile
@@ -72,7 +72,21 @@ The following cell providers can have files sent to them:
 - XFinity Mobile
 
 # Installation
+[(Back to top)](#table-of-contents)
+
+1. [Install](https://www.oracle.com/java/technologies/downloads/) JDK 21 or later.
+2. [Install](https://maven.apache.org/download.cgi) Apache Maven (version 3.9.6 or higher is preferred).
+3. Generate an executable `.jar` with `mvn clean install`. The generated `.jar` should be in the `target` folder.
+4. Run the `.jar` with the command `java -jar target/ttp-1.0.0-shaded.jar <flags> <arguments>`
+5. OPTIONAL -- Set an alias to the command in the above step to quickly use this program
 
 # Troubleshooting
+[(Back to top)](#table-of-contents)
+### `Error: Unable to send file` message
+The error mainly occurs because Gmail requires users to use an "app password" when logging into third-party apps. Generate an app password for your Gmail account by following [these instructions](https://support.google.com/accounts/answer/185833?hl=en) and then log in to the program using the app password you just generated. 
+### The program is saying `Successfully sent to device` but I'm not receiving messages
+Some cell service providers (like T-Mobile) block emails from sending messages through MMS gateways repeatedly in a short period. Add the email you use with this program to your device's contacts, and then try sending the files to your device again.
 
 # License
+[(Back to top)](#table-of-contents)
+The BSD 3-Clause License (BSD-3) 2024 - [Kedar Panchal](https://github.com/KedarPanchal). Please look at the [LICENSE](LICENSE) for further information.
