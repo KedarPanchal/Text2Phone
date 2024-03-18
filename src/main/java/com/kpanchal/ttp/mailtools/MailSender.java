@@ -66,6 +66,9 @@ public class MailSender {
 
     private boolean sendFile(MimeMessage message, File file) throws IOException {
         try {
+            if (!file.exists()) {
+                throw new IOException("Error: File not found");
+            }
             message.setSubject(file.getName());
             if (!file.isDirectory()) {
                 MimeBodyPart attachment = new MimeBodyPart();
