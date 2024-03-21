@@ -11,11 +11,25 @@ public class LoginArguments {
    @Parameter(names="Password", description="Password", password=true, echoInput=false)
    private String password;
 
+   @Parameter(names="Email Provider", description="""
+         [1] America OnLine
+         [2] G-Mail
+         [3] Hotmail/Windows Live
+         [4] iCloud
+         [5] Yahoo!
+         Enter the index of your email service provider""",
+         password=true, echoInput=true)
+   private int SMTPProviderIndex;
+
    public String getEmailAddress() {
       return this.emailAddress;
    }
 
    public String getPassword() {
       return this.password;
+   }
+
+   public int getSMTPProviderIndex() {
+      return this.SMTPProviderIndex;
    }
 }

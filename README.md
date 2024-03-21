@@ -51,7 +51,13 @@ A Java program that enables sending files from your PC to your phone using MMS G
 
 ### Supported SMTP providers
 
-Text2Phone uses MMS gateways to send files to your phone, which uses SMTP (E-Mail) in the backend. Gmail logins are only supported at the moment.
+Text2Phone uses MMS gateways to send files to your phone, which uses SMTP (E-Mail) in the backend. The list of supported providers is below:
+- America OnLine
+- G-Mail
+- Hotmail/Windows Live
+- iCloud
+- Outlook
+- Yahoo!
 
 ### Supported cell service providers
 

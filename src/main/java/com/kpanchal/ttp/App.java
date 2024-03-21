@@ -13,6 +13,7 @@ import com.kpanchal.ttp.argtools.InitialArguments;
 import com.kpanchal.ttp.argtools.LoginArguments;
 import com.kpanchal.ttp.argtools.RemoveDeviceArguments;
 import com.kpanchal.ttp.mailtools.Contact;
+import com.kpanchal.ttp.mailtools.Login;
 import com.kpanchal.ttp.mailtools.MailSender;
 
 public class App {
@@ -72,8 +73,11 @@ public class App {
                 .parse("Email Address", "Password"); // Hardcoded arguments lol
 
             Properties login = new Properties();
+            String SMTPProvider = Login.getSMTPAddress(loginArgs.getSMTPProviderIndex());
             login.setProperty("EmailAddress", loginArgs.getEmailAddress());
             login.setProperty("Password", loginArgs.getPassword());
+            login.setProperty("SMTP Provider", SMTPProvider);
+            login.setProperty("Port", Integer.toString(Login.getPort(SMTPProvider)));
             login.store(new FileOutputStream(propertiesPath), "Stored login email and password");
             System.out.println("Successfully logged in");
         } else {
@@ -152,7 +156,7 @@ public class App {
             System.err.println("Error: Unable to find login information. Run the program with the --login flag to log in");
             return;
         }
-        MailSender sender = new MailSender(loginInfo.getProperty("EmailAddress"), loginInfo.getProperty("Password"));
+        MailSender sender = new MailSender(loginInfo.getProperty("SMTP Provider"), loginInfo.getProperty("Port"), loginInfo.getProperty("EmailAddress"), loginInfo.getProperty("Password"));
         
         String devicePath = "config" + File.separator + "deviceinfo.properties";
         Properties deviceInfo = new Properties();

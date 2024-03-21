@@ -20,15 +20,15 @@ public class MailSender {
     private String sender;
     private Session session;
 
-    public MailSender(String sender, String password) throws IOException {
-        this.host = "smtp.gmail.com";
+    public MailSender(String host, String port, String sender, String password) throws IOException {
+        this.host = host;
         this.sender = sender;
 
         Properties properties = new Properties();
         properties.setProperty("mail.smtp.ssl.trust", this.host);
         properties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
         properties.setProperty("mail.smtp.host", this.host);
-        properties.setProperty("mail.smtp.port", "587");
+        properties.setProperty("mail.smtp.port", port);
         properties.setProperty("mail.smtp.auth", "true");
         properties.setProperty("mail.smtp.starttls.enable", "true");
 
