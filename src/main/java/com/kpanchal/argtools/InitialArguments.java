@@ -28,7 +28,8 @@ public class InitialArguments {
     @Parameter(names={"-h", "--help"}, description="Lists all commands and their usages", help=true)
     private boolean help = false;
 
-    
+    @Parameter(names={"-v", "--version"}, description="Gets project version")
+    private boolean version = true;
     
 
     public boolean getLogin() {
@@ -53,6 +54,10 @@ public class InitialArguments {
 
     public boolean getRemoveDevice() {
         return this.removeDevice;
+    }
+
+    public boolean getVersion() {
+        return this.version;
     }
 
     public List<String> getSendInfo() {

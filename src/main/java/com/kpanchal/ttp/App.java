@@ -16,6 +16,7 @@ import com.kpanchal.mailtools.Login;
 import com.kpanchal.mailtools.MailSender;
 
 public class App {
+    private static final String VERSION = "1.2.0";
     public static void main(String[] args) {
         InitialArguments initialArgs = new InitialArguments();
         JCommander jc = JCommander.newBuilder()
@@ -55,7 +56,9 @@ public class App {
             } catch (IOException e) {
                 System.err.println("Error: Unable to initialize message sender:\n" + e.getMessage());
             }
-        } else {
+        } else if (initialArgs.getVersion()) {
+            printVersion();
+        }else {
             jc.usage();
         }
     }
@@ -144,6 +147,10 @@ public class App {
         } catch (IOException e) {
             System.err.println("Error: No devices found. Run the program with the --add-device flag to add a device");
         }
+    }
+
+    public static void printVersion() {
+        System.out.println("Text2Phone v" + VERSION + " by Kedar Panchal");
     }
 
     public static void sendMessage(String deviceName, String filePath) throws IOException {
