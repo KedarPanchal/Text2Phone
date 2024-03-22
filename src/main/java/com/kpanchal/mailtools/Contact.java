@@ -1,4 +1,4 @@
-package com.kpanchal.ttp.mailtools;
+package com.kpanchal.mailtools;
 
 public class Contact {
 
