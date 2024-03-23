@@ -10,6 +10,7 @@ A Java program that enables sending files from your PC to your phone using MMS G
       - `-r` (or) `--remove-device`
       - `-d` (or) `--list-devices`
       - `-s` (or) `--send` (or) `--send-file`
+      - `-v` (or) `--version`
       - `-h` (or) `--help`
     - [Supported SMTP providers](#supported-smtp-providers)
     - [Supported cell service providers](#supported-cell-service-providers)
@@ -22,16 +23,15 @@ A Java program that enables sending files from your PC to your phone using MMS G
 ### Flags
 - With `-l` (or) `--login`: Logs into your SMTP provider. See [Supported SMTP providers](#supported-smtp-providers) for a full list of supported providers.
 
-  ![login image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/224478f9-8599-4a41-b44c-be596f637b8b)
+  ![Login image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/e4682ca8-f969-4041-9e9d-29fafd1b289c)
 
-  
 - With `-o` (or) `--logout`: Logs out of your SMTP provider.
 
-  ![logout image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/fde82bdb-5ec1-4c9e-bb54-3dc52e7308f5)
+  ![Logout image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/8a66b7da-5887-4894-8431-3d52b1341f76)
 
 - With `a` (or) `--add-device`: Adds a device to send files to.
 
-  ![add device image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/665a17a1-6dd1-4b07-9cfb-cf78cc426514)
+  ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/85412e4a-7c01-4a39-a2f4-f45c3e33be7c)
 
 - With `r` (or) `--remove-device`: Remove a device so files can no longer be sent to it.
 
@@ -39,15 +39,19 @@ A Java program that enables sending files from your PC to your phone using MMS G
 
 - With `d` (or) `--list-devices`: List all devices to which files can be sent.
 
-  ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/7c2f73a5-a364-4565-bbcb-4d7335988ef6)
+  ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/70040b76-52f5-4df3-be43-d9820580475d)
 
 - With `-s` (or) `--send` (or) `--send-file` `<device name> <filepath>` : Sends the file specified at `<filepath>` to an added device with the name `<device name>`. If the file at `<filepath>` is a folder, it is zipped and sent to the device. If no file at `<filepath>` exists, the value of the `<filepath>` argument is sent as a text message instead.
 
-  ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/bf4ac659-39ad-47f9-b677-5e04d15c2a97)
+  ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/6848d299-9685-43f2-b1f5-ddf9cebfee0c)
   
+- With `-v` (or) `--version`: Prints out the version information of this program.
+
+  ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/4ff6f973-054c-420d-8d09-d4a1f8acd6c5)
+
 - With `-h` (or) `--help`: Prints out the descriptions of all the available arguments. If a flag is specified that's an invalid argument for this program, the output of the `--help` flag is printed instead.
 
-  ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/82562390-8d20-4c9b-acf9-8004782700fc)
+  ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/99ccc458-112d-4488-bf2b-1a33212c248a)
 
 ### Supported SMTP providers
 
