@@ -72,13 +72,13 @@ public class App {
             JCommander.newBuilder()
                 .addObject(loginArgs)
                 .build()
-                .parse("Email Address", "Password"); // Hardcoded arguments lol
+                .parse("Email Address", "Password", "Email Provider"); // Hardcoded arguments lol
 
             Properties login = new Properties();
-            String SMTPProvider = Login.getSMTPAddress(loginArgs.getSMTPProviderIndex());
+            String SMTPProvider = Login.getSMTPAddress(loginArgs.getSMTPProviderIndex() - 1);
             login.setProperty("EmailAddress", loginArgs.getEmailAddress());
             login.setProperty("Password", loginArgs.getPassword());
-            login.setProperty("SMTP Provider", SMTPProvider);
+            login.setProperty("SMTPProvider", SMTPProvider);
             login.setProperty("Port", Integer.toString(Login.getPort(SMTPProvider)));
             login.store(new FileOutputStream(propertiesPath), "Stored login email and password");
             System.out.println("Successfully logged in");
@@ -162,7 +162,7 @@ public class App {
             System.err.println("Error: Unable to find login information. Run the program with the --login flag to log in");
             return;
         }
-        MailSender sender = new MailSender(loginInfo.getProperty("SMTP Provider"), loginInfo.getProperty("Port"), loginInfo.getProperty("EmailAddress"), loginInfo.getProperty("Password"));
+        MailSender sender = new MailSender(loginInfo.getProperty("SMTPProvider"), loginInfo.getProperty("Port"), loginInfo.getProperty("EmailAddress"), loginInfo.getProperty("Password"));
         
         String devicePath = "config" + File.separator + "deviceinfo.properties";
         Properties deviceInfo = new Properties();
