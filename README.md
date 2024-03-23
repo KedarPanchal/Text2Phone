@@ -98,5 +98,5 @@ The error mainly occurs because Gmail requires users to use an "app password" wh
 Some cell service providers (like T-Mobile) block emails from sending messages through MMS gateways repeatedly in a short period. Add the email you use with this program to your device's contacts, and then try sending the files to your device again. If that doesn't work, Gmail allows adding a `+` character followed by text before the `@` symbol when using your email address. For example, `test@gmail.com` and `test+sometext@gmail.com` are both considered the same email address and use the same login credentials. Try logging in with a similarly modified email address and sending your file to a device again.
 
 # License
-[(Back to top)](#table-of-contents)
+[(Back to top)](#table-of-contents)   
 The BSD 3-Clause License (BSD-3) 2024 - [Kedar Panchal](https://github.com/KedarPanchal). Please look at the [LICENSE](LICENSE) for further information.
