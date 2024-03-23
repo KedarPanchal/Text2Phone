@@ -33,9 +33,9 @@ A Java program that enables sending files from your PC to your phone using MMS G
 
   ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/85412e4a-7c01-4a39-a2f4-f45c3e33be7c)
 
-- With `r` (or) `--remove-device`: Remove a device so files can no longer be sent to it.
+- With `r` (or) `--remove-device` `device name`: Removes a device with the name `<device name>` so files can no longer be sent to it.
 
-  ![remove device image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/90c92505-55f8-4677-8a90-faef1f213e26)
+  ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/ea877d79-5118-4f3f-886f-cd6704237796)
 
 - With `d` (or) `--list-devices`: List all devices to which files can be sent.
 
