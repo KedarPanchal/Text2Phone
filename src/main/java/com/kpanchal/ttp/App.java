@@ -16,7 +16,7 @@ import com.kpanchal.mailtools.Login;
 import com.kpanchal.mailtools.MailSender;
 
 public class App {
-    private static final String VERSION = "1.2.0";
+    private static final String VERSION = "1.3.1";
     public static void main(String[] args) {
         InitialArguments initialArgs = new InitialArguments();
         JCommander jc = JCommander.newBuilder()
@@ -58,7 +58,7 @@ public class App {
             }
         } else if (initialArgs.getVersion()) {
             printVersion();
-        }else {
+        } else {
             jc.usage();
         }
     }

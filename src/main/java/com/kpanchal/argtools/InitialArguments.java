@@ -25,11 +25,11 @@ public class InitialArguments {
     @Parameter(names={"-s", "--send", "--send-file"}, description="Sends a file to iPhone address. The first argument is the name of the device the file will be sent to. The second is the path of the file that will be sent to the device.", arity=2)
     private List<String> sendInfo;
 
+    @Parameter(names={"-v", "--version"}, description="Gets project version")
+    private boolean version = false;
+
     @Parameter(names={"-h", "--help"}, description="Lists all commands and their usages", help=true)
     private boolean help = false;
-
-    @Parameter(names={"-v", "--version"}, description="Gets project version")
-    private boolean version = true;
     
 
     public boolean getLogin() {
