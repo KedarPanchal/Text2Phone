@@ -17,7 +17,7 @@ public class InitialArguments {
     private boolean addDevice = false;
 
     @Parameter(names={"-r", "--remove-device"}, description="Removes a device (images cannot be sent to this device)")
-    private boolean removeDevice = false;
+    private String removeDevice;
 
     @Parameter(names={"-d", "--list-devices"}, description="Lists devices that can have images be sent to")
     private boolean listDevices = false;
@@ -52,7 +52,7 @@ public class InitialArguments {
         return this.addDevice;
     }
 
-    public boolean getRemoveDevice() {
+    public String getRemoveDevice() {
         return this.removeDevice;
     }
 

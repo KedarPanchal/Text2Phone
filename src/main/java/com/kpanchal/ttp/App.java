@@ -42,9 +42,9 @@ public class App {
             } catch (IOException e) {
                 System.err.println("Error: Unable to add device:\n" + e.getMessage());
             }
-        } else if (initialArgs.getRemoveDevice()) {
+        } else if (initialArgs.getRemoveDevice() != null) {
             try {
-                removeDevice();
+                removeDevice(initialArgs.getRemoveDevice());
             } catch (IOException e) {
                 System.err.println("Error: Unable to remove device:\n" + e.getMessage());
             }
@@ -131,6 +131,19 @@ public class App {
         } else {
             deviceInfo.store(new FileOutputStream(propertiesPath), "Removed device " + deviceArgs.getDeviceName());
             System.out.println("Removed device " + deviceArgs.getDeviceName());
+        }
+    }
+
+    public static void removeDevice(String device) throws IOException {
+        String propertiesPath = "config" + File.separator + "deviceinfo.properties";
+
+        Properties deviceInfo = new Properties();
+        deviceInfo.load(new FileInputStream(propertiesPath));
+        if (deviceInfo.remove(device) == null) {
+            System.err.println("Error: No device with name " + device + " found");
+        } else {
+            deviceInfo.store(new FileOutputStream(propertiesPath), "Removed device " + device);
+            System.out.println("Removed device " + device);
         }
     }
 
