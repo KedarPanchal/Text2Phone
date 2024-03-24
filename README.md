@@ -33,9 +33,9 @@ A Java program that enables sending files from your PC to your phone using MMS G
 
   ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/85412e4a-7c01-4a39-a2f4-f45c3e33be7c)
 
-- With `r` (or) `--remove-device`: Remove a device so files can no longer be sent to it.
+- With `r` (or) `--remove-device` `device name`: Removes a device with the name `<device name>` so files can no longer be sent to it.
 
-  ![remove device image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/90c92505-55f8-4677-8a90-faef1f213e26)
+  ![image](https://github.com/KedarPanchal/Text2Phone/assets/115903691/ea877d79-5118-4f3f-886f-cd6704237796)
 
 - With `d` (or) `--list-devices`: List all devices to which files can be sent.
 
@@ -98,5 +98,5 @@ The error mainly occurs because Gmail requires users to use an "app password" wh
 Some cell service providers (like T-Mobile) block emails from sending messages through MMS gateways repeatedly in a short period. Add the email you use with this program to your device's contacts, and then try sending the files to your device again. If that doesn't work, Gmail allows adding a `+` character followed by text before the `@` symbol when using your email address. For example, `test@gmail.com` and `test+sometext@gmail.com` are both considered the same email address and use the same login credentials. Try logging in with a similarly modified email address and sending your file to a device again.
 
 # License
-[(Back to top)](#table-of-contents)
+[(Back to top)](#table-of-contents)   
 The BSD 3-Clause License (BSD-3) 2024 - [Kedar Panchal](https://github.com/KedarPanchal). Please look at the [LICENSE](LICENSE) for further information.
