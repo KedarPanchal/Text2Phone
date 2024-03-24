@@ -25,37 +25,17 @@ public class App {
         jc.parse(args);
         
         if (initialArgs.getLogin()) {
-            try {
                 setLogin();
-            } catch (IOException e) {
-                System.err.println("Error: Unable to generate login configuration:\n" + e.getMessage());
-            }
         } else if (initialArgs.getLogout()) {
-            try {
                 logout();
-            } catch (IOException e) {
-                System.err.println("Error: Unable to logout:\n" + e.getMessage());
-            }
         } else if (initialArgs.getAddDevice()) {
-            try {
                 addDevice();
-            } catch (IOException e) {
-                System.err.println("Error: Unable to add device:\n" + e.getMessage());
-            }
         } else if (initialArgs.getRemoveDevice() != null) {
-            try {
                 removeDevice(initialArgs.getRemoveDevice());
-            } catch (IOException e) {
-                System.err.println("Error: Unable to remove device:\n" + e.getMessage());
-            }
         } else if (initialArgs.getListDevices()) {
             listDevices();
         } else if (initialArgs.getSendInfo() != null) {
-            try {
                 sendMessage(initialArgs.getSendInfo().get(0), initialArgs.getSendInfo().get(1));
-            } catch (IOException e) {
-                System.err.println("Error: Unable to initialize message sender:\n" + e.getMessage());
-            }
         } else if (initialArgs.getVersion()) {
             printVersion();
         } else {
@@ -63,7 +43,7 @@ public class App {
         }
     }
 
-    public static void setLogin() throws IOException {
+    public static void setLogin() {
         new File("config").mkdir();
         String propertiesPath = "config" + File.separator + "login.properties";
 
@@ -73,7 +53,8 @@ public class App {
                 .addObject(loginArgs)
                 .build()
                 .parse("Email Address", "Password", "Email Provider"); // Hardcoded arguments lol
-
+            try {
+                (new File(propertiesPath)).createNewFile();
             Properties login = new Properties();
             String SMTPProvider = Login.getSMTPAddress(loginArgs.getSMTPProviderIndex() - 1);
             login.setProperty("EmailAddress", loginArgs.getEmailAddress());
@@ -82,12 +63,15 @@ public class App {
             login.setProperty("Port", Integer.toString(Login.getPort(SMTPProvider)));
             login.store(new FileOutputStream(propertiesPath), "Stored login email and password");
             System.out.println("Successfully logged in");
+            } catch (IOException e) {
+                System.err.println("Error: Unable to generate login configuration:\n" + e.getMessage());
+            }           
         } else {
             System.out.println("Error: You're already logged in. Run the program with the --logout flag to log out");
         }    
     }
 
-    public static void logout() throws IOException {
+    public static void logout() {
         String propertiesPath = "config" + File.separator + "login.properties";
         if (new File(propertiesPath).exists()) {
             new File(propertiesPath).delete();
@@ -97,7 +81,7 @@ public class App {
         }
     }
 
-    public static void addDevice() throws IOException {
+    public static void addDevice() {
         new File("config").mkdir();
         String propertiesPath = "config" + File.separator + "deviceinfo.properties";
 
@@ -107,37 +91,23 @@ public class App {
             .build()
             .parse("Device Name", "Phone Number", "Cell Service Provider"); // More hardcoded arguments rofl
 
+        try {
         new File(propertiesPath).createNewFile();
         Properties deviceInfo = new Properties();
         deviceInfo.load(new FileInputStream(propertiesPath));
         deviceInfo.setProperty(deviceArgs.getDeviceName(), Contact.createContact(deviceArgs.getPhoneNumber(), deviceArgs.getCellProviderIndex() - 1));
         deviceInfo.store(new FileOutputStream(propertiesPath), "Added device " + deviceArgs.getDeviceName());
         System.out.println("Added device " + deviceArgs.getDeviceName());
-    }
-
-    public static void removeDevice() throws IOException {
-        String propertiesPath = "config" + File.separator + "deviceInfo.properties";
-
-        RemoveDeviceArguments deviceArgs = new RemoveDeviceArguments();
-        JCommander.newBuilder()
-            .addObject(deviceArgs)
-            .build()
-            .parse("Device Name");
-
-        Properties deviceInfo = new Properties();
-        deviceInfo.load(new FileInputStream(propertiesPath));
-        if (deviceInfo.remove(deviceArgs.getDeviceName()) == null) {
-            System.err.println("Error: No device with name " + deviceArgs.getDeviceName() + " found");
-        } else {
-            deviceInfo.store(new FileOutputStream(propertiesPath), "Removed device " + deviceArgs.getDeviceName());
-            System.out.println("Removed device " + deviceArgs.getDeviceName());
+        } catch (IOException e) {
+            System.err.println("Error: Unable to add device:\n" + e.getMessage());
         }
     }
 
-    public static void removeDevice(String device) throws IOException {
+    public static void removeDevice(String device) {
         String propertiesPath = "config" + File.separator + "deviceinfo.properties";
 
         Properties deviceInfo = new Properties();
+        try {
         deviceInfo.load(new FileInputStream(propertiesPath));
         if (deviceInfo.remove(device) == null) {
             System.err.println("Error: No device with name " + device + " found");
@@ -145,6 +115,10 @@ public class App {
             deviceInfo.store(new FileOutputStream(propertiesPath), "Removed device " + device);
             System.out.println("Removed device " + device);
         }
+        } catch (IOException e) {
+            System.err.println("Error: Unable to remove device:\n" + e.getMessage());
+        }
+        
     }
 
     public static void listDevices() {
@@ -166,7 +140,7 @@ public class App {
         System.out.println("Text2Phone v" + VERSION + " by Kedar Panchal");
     }
 
-    public static void sendMessage(String deviceName, String filePath) throws IOException {
+    public static void sendMessage(String deviceName, String filePath) {
         String loginPath = "config" + File.separator + "login.properties";
         Properties loginInfo = new Properties();
         try {
@@ -175,7 +149,13 @@ public class App {
             System.err.println("Error: Unable to find login information. Run the program with the --login flag to log in");
             return;
         }
-        MailSender sender = new MailSender(loginInfo.getProperty("SMTPProvider"), loginInfo.getProperty("Port"), loginInfo.getProperty("EmailAddress"), loginInfo.getProperty("Password"));
+        MailSender sender;
+        try {
+            sender = new MailSender(loginInfo.getProperty("SMTPProvider"), loginInfo.getProperty("Port"), loginInfo.getProperty("EmailAddress"), loginInfo.getProperty("Password"));
+        } catch (IOException e) {
+            System.err.println("Error: Unable to initialize message sender:\n" + e.getMessage());
+            return;
+        }
         
         String devicePath = "config" + File.separator + "deviceinfo.properties";
         Properties deviceInfo = new Properties();
