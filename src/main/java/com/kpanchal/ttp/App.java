@@ -10,13 +10,12 @@ import com.beust.jcommander.JCommander;
 import com.kpanchal.ttp.argtools.AddDeviceArguments;
 import com.kpanchal.ttp.argtools.InitialArguments;
 import com.kpanchal.ttp.argtools.LoginArguments;
-import com.kpanchal.ttp.argtools.RemoveDeviceArguments;
 import com.kpanchal.ttp.mailtools.Contact;
 import com.kpanchal.ttp.mailtools.Login;
 import com.kpanchal.ttp.mailtools.MailSender;
 
 public class App {
-    private static final String VERSION = "1.3.1";
+    private static final String VERSION = "1.4.1";
     public static void main(String[] args) {
         InitialArguments initialArgs = new InitialArguments();
         JCommander jc = JCommander.newBuilder()
@@ -25,17 +24,17 @@ public class App {
         jc.parse(args);
         
         if (initialArgs.getLogin()) {
-                setLogin();
+            setLogin();
         } else if (initialArgs.getLogout()) {
-                logout();
+            logout();
         } else if (initialArgs.getAddDevice()) {
-                addDevice();
+            addDevice();
         } else if (initialArgs.getRemoveDevice() != null) {
-                removeDevice(initialArgs.getRemoveDevice());
+            removeDevice(initialArgs.getRemoveDevice());
         } else if (initialArgs.getListDevices()) {
             listDevices();
         } else if (initialArgs.getSendInfo() != null) {
-                sendMessage(initialArgs.getSendInfo().get(0), initialArgs.getSendInfo().get(1));
+            sendMessage(initialArgs.getSendInfo().get(0), initialArgs.getSendInfo().get(1));
         } else if (initialArgs.getVersion()) {
             printVersion();
         } else {
@@ -55,14 +54,14 @@ public class App {
                 .parse("Email Address", "Password", "Email Provider"); // Hardcoded arguments lol
             try {
                 (new File(propertiesPath)).createNewFile();
-            Properties login = new Properties();
-            String SMTPProvider = Login.getSMTPAddress(loginArgs.getSMTPProviderIndex() - 1);
-            login.setProperty("EmailAddress", loginArgs.getEmailAddress());
-            login.setProperty("Password", loginArgs.getPassword());
-            login.setProperty("SMTPProvider", SMTPProvider);
-            login.setProperty("Port", Integer.toString(Login.getPort(SMTPProvider)));
-            login.store(new FileOutputStream(propertiesPath), "Stored login email and password");
-            System.out.println("Successfully logged in");
+                Properties login = new Properties();
+                String SMTPProvider = Login.getSMTPAddress(loginArgs.getSMTPProviderIndex() - 1);
+                login.setProperty("EmailAddress", loginArgs.getEmailAddress());
+                login.setProperty("Password", loginArgs.getPassword());
+                login.setProperty("SMTPProvider", SMTPProvider);
+                login.setProperty("Port", Integer.toString(Login.getPort(SMTPProvider)));
+                login.store(new FileOutputStream(propertiesPath), "Stored login email and password");
+                System.out.println("Successfully logged in"); 
             } catch (IOException e) {
                 System.err.println("Error: Unable to generate login configuration:\n" + e.getMessage());
             }           
@@ -92,15 +91,15 @@ public class App {
             .parse("Device Name", "Phone Number", "Cell Service Provider"); // More hardcoded arguments rofl
 
         try {
-        new File(propertiesPath).createNewFile();
-        Properties deviceInfo = new Properties();
-        deviceInfo.load(new FileInputStream(propertiesPath));
-        deviceInfo.setProperty(deviceArgs.getDeviceName(), Contact.createContact(deviceArgs.getPhoneNumber(), deviceArgs.getCellProviderIndex() - 1));
-        deviceInfo.store(new FileOutputStream(propertiesPath), "Added device " + deviceArgs.getDeviceName());
-        System.out.println("Added device " + deviceArgs.getDeviceName());
+            new File(propertiesPath).createNewFile();
+            Properties deviceInfo = new Properties();
+            deviceInfo.load(new FileInputStream(propertiesPath));
+            deviceInfo.setProperty(deviceArgs.getDeviceName(), Contact.createContact(deviceArgs.getPhoneNumber(), deviceArgs.getCellProviderIndex() - 1));
+            deviceInfo.store(new FileOutputStream(propertiesPath), "Added device " + deviceArgs.getDeviceName());
+            System.out.println("Added device " + deviceArgs.getDeviceName());  
         } catch (IOException e) {
             System.err.println("Error: Unable to add device:\n" + e.getMessage());
-        }
+        }     
     }
 
     public static void removeDevice(String device) {
@@ -108,13 +107,13 @@ public class App {
 
         Properties deviceInfo = new Properties();
         try {
-        deviceInfo.load(new FileInputStream(propertiesPath));
-        if (deviceInfo.remove(device) == null) {
-            System.err.println("Error: No device with name " + device + " found");
-        } else {
-            deviceInfo.store(new FileOutputStream(propertiesPath), "Removed device " + device);
-            System.out.println("Removed device " + device);
-        }
+            deviceInfo.load(new FileInputStream(propertiesPath));
+            if (deviceInfo.remove(device) == null) {
+                System.err.println("Error: No device with name " + device + " found");
+            } else {
+                deviceInfo.store(new FileOutputStream(propertiesPath), "Removed device " + device);
+                System.out.println("Removed device " + device);
+            }
         } catch (IOException e) {
             System.err.println("Error: Unable to remove device:\n" + e.getMessage());
         }
