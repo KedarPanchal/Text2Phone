@@ -1,4 +1,4 @@
-package com.kpanchal.mailtools;
+package com.kpanchal.ttp.mailtools;
 
 import java.io.File;
 import java.io.IOException;

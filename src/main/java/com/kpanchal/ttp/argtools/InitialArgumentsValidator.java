@@ -1,4 +1,4 @@
-package com.kpanchal.argtools;
+package com.kpanchal.ttp.argtools;
 
 import java.util.Map;
 

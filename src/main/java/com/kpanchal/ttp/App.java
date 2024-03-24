@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.util.Properties;
 
 import com.beust.jcommander.JCommander;
-import com.kpanchal.argtools.AddDeviceArguments;
-import com.kpanchal.argtools.InitialArguments;
-import com.kpanchal.argtools.LoginArguments;
-import com.kpanchal.argtools.RemoveDeviceArguments;
-import com.kpanchal.mailtools.Contact;
-import com.kpanchal.mailtools.Login;
-import com.kpanchal.mailtools.MailSender;
+import com.kpanchal.ttp.argtools.AddDeviceArguments;
+import com.kpanchal.ttp.argtools.InitialArguments;
+import com.kpanchal.ttp.argtools.LoginArguments;
+import com.kpanchal.ttp.argtools.RemoveDeviceArguments;
+import com.kpanchal.ttp.mailtools.Contact;
+import com.kpanchal.ttp.mailtools.Login;
+import com.kpanchal.ttp.mailtools.MailSender;
 
 public class App {
     private static final String VERSION = "1.3.1";
